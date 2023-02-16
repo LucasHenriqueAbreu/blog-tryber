@@ -4,16 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:reset": "npx -y tsc && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/jest": "^29.4.0",
+    "dotenv": "^16.0.3",
+    "sequelize": "^6.28.0",
+    "typescript": "^4.9.5"
+  },
+  "devDependencies": {
     "jest": "^29.4.3",
     "ts-jest": "^29.0.5",
     "ts-node": "^10.9.1",
-    "typescript": "^4.9.5"
+    "@types/jest": "^29.4.0",
+    "@types/node": "^18.13.0",
+    "@types/sequelize": "^4.28.14",
+    "mysql2": "^3.1.2",
+    "sequelize-cli": "^6.6.0"
   }
 }
