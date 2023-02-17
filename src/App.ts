@@ -1,5 +1,6 @@
 import 'express-async-errors';
 import express from 'express';
+import postRoutes from './api/routes/PostRoutes';
 import ErrorHandler from './api/middlewares/ErrorHandler';
 
 class App {
@@ -28,17 +29,14 @@ class App {
   }
 
   /**
-   * Inicialize middlewares aqui
-   */
-  private initMiddlewares(): void {
-    this.app.use(ErrorHandler.handle);
-  }
-
-  /**
    * Inicialize rotas aqui
    */
   private initRoutes(): void {
-    
+    this.app.use(postRoutes);
+  }
+
+  private initMiddlewares() {
+    this.app.use(ErrorHandler.handle);
   }
 
   public start(PORT: string | number):void {

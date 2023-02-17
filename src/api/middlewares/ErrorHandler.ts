@@ -1,6 +1,6 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Response, Request } from 'express';
 
-export default class ErrorHandler {
+class ErrorHandler {
   public static handle(
     err: Error,
     _req: Request,
@@ -8,8 +8,11 @@ export default class ErrorHandler {
     _next: NextFunction
   ): Response {
     if (err instanceof Error && err.stack) {
-      return res.status(parseInt(err.stack, 10)).json({ message: err.message });
+      return res.status(parseInt(err.stack)).json({ message: err.message });
     }
-    return res.status(500).json({ message: err.message });
+
+    return res.status(500).json({ message: 'Erro não identificado' });
   }
 }
+
+export default ErrorHandler;

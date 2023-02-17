@@ -3,7 +3,6 @@ import Post from "../../database/models/PostModel";
 import IdNotFoundError from "../errors/IdNotFoundError";
 import IPost from "../interfaces/IPost";
 import IServicePost from "../interfaces/IServicePost";
-import IService from "../interfaces/IServicePost";
 
 const ID_NOT_FOUND = 'ID não existe';
 
@@ -11,7 +10,7 @@ export default class PostService implements IServicePost{
   protected model: ModelStatic<Post> = Post;
 
   async create(dto: IPost): Promise<Post> {
-    return await this.model.create({ ...dto })
+    return await this.model.create({ ...dto });
   }
   async readAll(): Promise<Post[]> {
     return await this.model.findAll();
