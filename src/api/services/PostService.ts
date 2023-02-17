@@ -21,10 +21,19 @@ export default class PostService implements IServicePost{
     if(!post) throw new IdNotFoundError(ID_NOT_FOUND);
     return post;
   }
-  update(id: string, dto: IPost): Promise<Post> {
-    throw new Error("Method not implemented.");
+  async update(id: number, dto: IPost): Promise<Post> {
+    await this.readById(id);
+    await this.model.update({
+      ...dto
+    }, {
+      where: { id: id }
+    });
+    return await this.readById(id);
   }
-  delete(id: string): Promise<void> {
-    throw new Error("Method not implemented.");
+  async delete(id: number): Promise<void> {
+    await this.readById(id);
+    await this.model.destroy({
+      where: { id: id }
+    });
   }
 }
