@@ -13,14 +13,17 @@ export default class PostService implements IServicePost{
   async create(dto: IPost): Promise<Post> {
     return await this.model.create({ ...dto })
   }
+
   async readAll(): Promise<Post[]> {
     return await this.model.findAll();
   }
+  
   async readById(id: number): Promise<Post> {
     const post = await this.model.findOne({ where: { id: id } });
     if(!post) throw new IdNotFoundError(ID_NOT_FOUND);
     return post;
   }
+  
   async update(id: number, dto: IPost): Promise<Post> {
     await this.readById(id);
     await this.model.update({
@@ -30,6 +33,7 @@ export default class PostService implements IServicePost{
     });
     return await this.readById(id);
   }
+  
   async delete(id: number): Promise<void> {
     await this.readById(id);
     await this.model.destroy({
