@@ -1,41 +1,41 @@
 import { Model } from "sequelize";
 import { expect } from "chai";
 import Sinon from "sinon";
-import PostService from "../../src/api/services/PostService";
-import Post from "../../src/database/models/PostModel";
+import Comment from "../../src/database/models/CommentModel";
+import CommentService from "../../src/api/services/CommentService";
 
-describe('Testes de serviço: Read Post by Id', function() {
+describe('Testes de serviço: Read Comment by Id', function() {
   afterEach(function () {
     Sinon.restore();
   });
   
-  it('Caso 1: Deve ler 1 Post caso Id for valido', async function () {
+  it('Caso 1: Deve ler 1 Comment caso Id for valido', async function () {
     // GIVEN
     const inputMock: number = 1;
-    const outputMock: Post = new Post({
+    const outputMock: Comment = new Comment({
       id: 1,
-      title: 'Typescript na pratica',
-      content: 'Typescript é uma boa ferramenta para ajudar no POO',
+      content: 'Typescript é massa!',
+      postId: 1
     });
 
     // WHEN
     Sinon.stub(Model, 'findOne').resolves(outputMock);
-    const service = new PostService();
+    const service = new CommentService();
     const result = await service.readById(inputMock);
 
     // THEN
     expect(result).to.be.equal(outputMock);
   });
 
-  it('Caso 2: Deve ler "ID post não existe" quando Id não existir', async function () {
+  it('Caso 2: Deve ler "ID comentario não existe" quando Id não existir', async function () {
     // GIVEN
-    const ID_NOT_FOUND = 'ID post não existe'
+    const ID_NOT_FOUND = 'ID comentario não existe'
     const inputMock: number = 1000;
 
     try {
       // WHEN
       Sinon.stub(Model, 'findOne').resolves(null);
-      const service = new PostService();
+      const service = new CommentService();
       await service.readById(inputMock);
     } catch (error) {
       // THEN

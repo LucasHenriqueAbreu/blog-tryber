@@ -28,9 +28,9 @@ describe('Testes de serviço: Update Post', function() {
     expect(result).to.be.equal(inputOutputMock);
   });
 
-  it('Caso 2: Deve ler "ID não existe" quando Id não existir', async function () {
+  it('Caso 2: Deve ler "ID post não existe" quando Id não existir', async function () {
     // GIVEN
-    const ID_NOT_FOUND = 'ID não existe'
+    const ID_NOT_FOUND = 'ID post não existe'
     const inputMock: number = 1000;
 
     const inputOutputMock: Post = new Post({

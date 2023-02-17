@@ -35,7 +35,7 @@ Comment.init({
   timestamps: false
 });
 
-Comment.belongsTo(Post, { foreignKey: 'post_id', as: 'postId' });
-Post.hasMany(Comment, { foreignKey: 'post_id', as: 'postId' });
+Comment.belongsTo(Post, { foreignKey: 'post_id', as: 'id_post' });
+Post.hasMany(Comment, { foreignKey: 'post_id', as: 'id_post' });
 
 export default Comment;

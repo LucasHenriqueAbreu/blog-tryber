@@ -5,13 +5,13 @@ import IPost from "../interfaces/IPost";
 import IServicePost from "../interfaces/IServicePost";
 import IService from "../interfaces/IServicePost";
 
-const ID_NOT_FOUND = 'ID não existe';
+const ID_NOT_FOUND = 'ID post não existe';
 
 export default class PostService implements IServicePost{
   protected model: ModelStatic<Post> = Post;
 
   async create(dto: IPost): Promise<Post> {
-    return await this.model.create({ ...dto })
+    return await this.model.create({ ...dto });
   }
 
   async readAll(): Promise<Post[]> {

@@ -1,21 +1,21 @@
 import { Model } from "sequelize";
 import { expect } from "chai";
 import Sinon from "sinon";
-import PostService from "../../src/api/services/PostService";
-import Post from "../../src/database/models/PostModel";
+import Comment from "../../src/database/models/CommentModel";
+import CommentService from "../../src/api/services/CommentService";
 
-describe('Testes de serviço: Delete Post', function() {
+describe('Testes de serviço: Delete Comment', function() {
   afterEach(function () {
     Sinon.restore();
   });
   
-  it('Caso 1: Deve deletar Post caso Id for valido', async function () {
+  it('Caso 1: Deve deletar Comment caso Id for valido', async function () {
     // GIVEN
     const inputMock: number = 1;
-    const inputOutputMock: Post = new Post({
+    const inputOutputMock: Comment = new Comment({
       id: 1,
-      title: 'Typescript na pratica',
-      content: 'Typescript é uma boa ferramenta para ajudar no POO',
+      content: 'Typescript é massa!',
+      postId: 1
     });
 
     let result: boolean = false;
@@ -23,7 +23,7 @@ describe('Testes de serviço: Delete Post', function() {
       // WHEN
       Sinon.stub(Model, 'destroy').resolves();
       Sinon.stub(Model, 'findOne').resolves(inputOutputMock);
-      const service = new PostService();
+      const service = new CommentService();
       await service.delete(inputMock);
       result = true;
     } catch (error) {
@@ -33,15 +33,15 @@ describe('Testes de serviço: Delete Post', function() {
     expect(result).to.be.true;
   });
 
-  it('Caso 2: Deve ler "ID post não existe" quando Id não existir', async function () {
+  it('Caso 2: Deve ler "ID comentario não existe" quando Id não existir', async function () {
     // GIVEN
-    const ID_NOT_FOUND = 'ID post não existe'
+    const ID_NOT_FOUND = 'ID comentario não existe'
     const inputMock: number = 1000;
 
     try {
       // WHEN
       Sinon.stub(Model, 'findOne').resolves(null);
-      const service = new PostService();
+      const service = new CommentService();
       await service.delete(inputMock);
     } catch (error) {
       // THEN
